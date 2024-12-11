@@ -49,7 +49,7 @@ pipeline{
           }
       }
     }
-      stage('Build'){
+    stage('Build'){
       steps{
         sh 'mvn -B -DskipTests clean package'
       }
@@ -65,6 +65,13 @@ pipeline{
             echo(message: 'maven Build unsuccessfull')
           }
       }
+    }
+    stage('Build docker image'){
+      steps{
+        script{
+              sh 'docker build -t jenkins/my-app-1.0-SNAPSHOT .'
+            }
+        }
     }
       
   }
