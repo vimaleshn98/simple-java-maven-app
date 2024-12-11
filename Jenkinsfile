@@ -59,19 +59,12 @@ pipeline{
           }
           success{
             echo(message: 'maven Build successfull')
-            archive '**/target/*.jar'
+            archiveArtifacts artifacts: '**/target/*.jar'
           }
           unsuccessful{
             echo(message: 'maven Build unsuccessfull')
           }
       }
-    }
-    stage('Build docker image'){
-      steps{
-        script{
-              sh 'docker build -t jenkins/my-app-1.0-SNAPSHOT .'
-            }
-        }
     }
       
   }
